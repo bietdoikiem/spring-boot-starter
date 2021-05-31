@@ -42,7 +42,7 @@ public class AppConfig {
 
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.rmit.demo.model");
+        em.setPackagesToScan("com.rmit.app.model");
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
 
