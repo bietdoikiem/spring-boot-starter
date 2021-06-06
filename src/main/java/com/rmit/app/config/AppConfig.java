@@ -1,7 +1,12 @@
 package com.rmit.app.config;
 
+import com.rmit.app.model.*;
+import com.rmit.app.service.AuthorService;
+import com.rmit.app.service.BookService;
+import com.rmit.app.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -29,6 +34,25 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "com.rmit.app.repository")
 public class AppConfig {
 
+    @Bean
+    public Library library() {return new Library();}
+
+    @Bean
+    public Author author() {return new Author();}
+
+    @Bean
+    public Book book() {return new Book();}
+
+    @Bean
+    public LibraryService libraryService() {return new LibraryService();}
+
+    @Bean
+    public AuthorService authorService() {return new AuthorService();}
+
+    @Bean
+    public BookService bookService() {return new BookService();}
+
+
 
     @Autowired
     private Environment env;
@@ -42,7 +66,7 @@ public class AppConfig {
 
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.rmit.demo.model");
+        em.setPackagesToScan("com.rmit.app.model");
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
 
